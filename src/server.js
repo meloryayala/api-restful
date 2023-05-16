@@ -11,9 +11,8 @@ const app = express()
 //Connecting the database
 db.connect()
 
-
-//Able the server to receive data via post (form)
-app.use(express.urlencoded({ extended: true }))
+//Habilita server para receber dados json
+app.use(express.json())
 
 //Defining the routes
 app.use('/api', routes)
