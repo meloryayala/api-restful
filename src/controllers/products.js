@@ -5,7 +5,7 @@ async function get(req, res) {
     const { id } = req.params  //req.query => ?id=123 //req.body => post
 
     const obj = id ? { _id: id } : null
-    
+
     // if (id) {
     //     obj._id = id
     // }
@@ -16,31 +16,51 @@ async function get(req, res) {
 }
 
 async function post(req, res) {
-const {
-    name,
-    brand,
-    price,
-} = req.body
+    const {
+        name,
+        brand,
+        price,
+    } = req.body
 
-console.log(req.body)
+    console.log(req.body)
 
-const product = new ProductModel({
-    name,
-    brand,
-    price,
-})
+    const product = new ProductModel({
+        name,
+        brand,
+        price,
+    })
 
-product.save()
+    product.save()
 
-res.send({
-    message: 'success'
-})
+    res.send({
+        message: 'success '
+    })
 
 }
 
+async function put(req, res) {
+    const { id } = req.params
 
+    const product = await ProductModel.findOneAndUpdate({ _id: id }, req.body, { new: true })
+    res.send({
+        message: 'success ',
+        product,
+    })
+
+    //Caso não precise retornar o novo objeto atualizado, pode usar esse:
+    // const product = await ProductModel.findOne({ _id: id })
+
+    // await product.updateOne(req.body)
+
+    // res.send({
+    //     message: 'success ',
+    //     product,
+    // })
+
+}
 
 module.exports = {
-    get, 
+    get,
     post,
+    put,
 }
