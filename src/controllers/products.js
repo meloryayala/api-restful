@@ -33,7 +33,7 @@ async function post(req, res) {
     product.save()
 
     res.send({
-        message: 'success '
+        message: 'success'
     })
 
 }
@@ -43,7 +43,7 @@ async function put(req, res) {
 
     const product = await ProductModel.findOneAndUpdate({ _id: id }, req.body, { new: true })
     res.send({
-        message: 'success ',
+        message: 'success',
         product,
     })
 
